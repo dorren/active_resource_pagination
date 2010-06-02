@@ -1,6 +1,34 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe ActiveResource::Pagination do
+  describe "##per_page" do
+    it "should config per_page" do
+      ActiveResource::Base.per_page.should be_nil
+      ActiveResource::Base.per_page = 3
+      ActiveResource::Base.per_page.should == 3
+      
+      class MySrc < ActiveResource::Base; end
+      MySrc.per_page.should == 3
+    end
+  
+    it "should override per_page in method" do
+      class Something < ActiveResource::Base
+        def self.per_page
+          2
+        end
+      end
+    
+      Something.per_page.should == 2
+    end
+
+    it "should override per_page ad hoc" do
+      class Comment < ActiveResource::Base
+      end
+      Comment.per_page = 5
+      Comment.per_page.should == 5
+    end
+  end
+  
   describe "##paginate" do
     before(:all) do
       class Article < ActiveResource::Base
@@ -22,17 +50,6 @@ describe ActiveResource::Pagination do
     
     it "should respond to paginate" do
       ActiveResource::Base.should respond_to(:paginate)
-    end
-    
-    it "should override per_page in method" do
-      Article.per_page.should == 2
-    end
-
-    it "should override per_page ad hoc" do
-      class Comment < ActiveResource::Base
-      end
-      Comment.per_page = 5
-      Comment.per_page.should == 5
     end
     
     describe "when backend does not paginate" do  

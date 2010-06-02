@@ -11,15 +11,13 @@ module ActiveResource
   #                    :params => {:year => 2010, :page => 1, :per_page => 20})
   #
   #  To set default per_page value for all resources. you can do
-  #    ActiveResource.per_page = 20    # do this in config/environment or initializers
+  #    ActiveResource::Base.per_page = 20    # do this in config/environment or initializers
   # 
   # or to implement per_page() in your resource class.
   module Pagination
     def self.included(base)
       base.class_eval do
-        class << self
-          attr_accessor :per_page
-        end
+        cattr_accessor :per_page
       end
       base.extend ClassMethods
     end
@@ -36,11 +34,12 @@ module ActiveResource
       def paginate(*args)
         options = args.last || {}
         options = options[:params] || options
+        options = options.reject{|k, v| v.blank?}
         options = {:page => 1, :per_page => per_page}.merge(options)
         page = options[:page]
         per_page = options[:per_page]
         
-        arr = find(*args)
+        arr = find(*args) || []
         total_entries = options[:total_entries] || arr.size 
         WillPaginate::Collection.create(page, per_page, total_entries) do |pager|
           if arr.size > per_page
