@@ -14,7 +14,7 @@ describe ActiveResource::Pagination do
           instantiate_collection(format.decode(xml))
         end
       end
-
+      
       # generate 5 articles, per_page is 2
       xml = (1..5).collect{|x|  {:name => "article #{x}", :content => "blah blah #{x}"}}.to_xml(:root => "articles")
       @articles = Article.from_xml(xml)
@@ -24,10 +24,17 @@ describe ActiveResource::Pagination do
       ActiveResource::Base.should respond_to(:paginate)
     end
     
-    it "should override per_page" do
+    it "should override per_page in method" do
       Article.per_page.should == 2
     end
 
+    it "should override per_page ad hoc" do
+      class Comment < ActiveResource::Base
+      end
+      Comment.per_page = 5
+      Comment.per_page.should == 5
+    end
+    
     describe "when backend does not paginate" do  
       before(:each) do
         Article.should_receive(:find).and_return(@articles)      

@@ -9,8 +9,18 @@ module ActiveResource
   #   Article.paginate(:all, :page => 2, :per_page => 20, :total_entries => 123)
   #   Article.paginate(:all, :from => :most_popular,
   #                    :params => {:year => 2010, :page => 1, :per_page => 20})
+  #
+  #  To set default per_page value for all resources. you can do
+  #    ActiveResource.per_page = 20    # do this in config/environment or initializers
+  # 
+  # or to implement per_page() in your resource class.
   module Pagination
     def self.included(base)
+      base.class_eval do
+        class << self
+          attr_accessor :per_page
+        end
+      end
       base.extend ClassMethods
     end
     
