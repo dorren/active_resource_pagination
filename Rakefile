@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "active_resource_pagination"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Adds pagination to Active Resource}
+    gem.description = %Q{Adds pagination to Active Resource}
     gem.email = "dorrenchen@gmail.com"
     gem.homepage = "http://github.com/dorren/active_resource_pagination"
     gem.authors = ["Dorren Chen"]
