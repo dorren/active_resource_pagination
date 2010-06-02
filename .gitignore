@@ -19,3 +19,4 @@ rdoc
 pkg
 
 ## PROJECT::SPECIFIC
+active_resource_pagination.gemspec
