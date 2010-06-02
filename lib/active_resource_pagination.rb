@@ -24,12 +24,7 @@ module ActiveResource
       base.extend ClassMethods
     end
     
-    module ClassMethods
-      # can be overrided in subclass
-      def per_page
-        10
-      end
-      
+    module ClassMethods      
       # use same method signatures as find(), optional additional parameters: 
       #   page - current page
       #   per_pape - entries per page
