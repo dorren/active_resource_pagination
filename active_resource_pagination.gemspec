@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{active_resource_pagination}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dorren Chen"]
-  s.date = %q{2010-06-02}
+  s.date = %q{2010-06-04}
   s.description = %q{Adds pagination to Active Resource}
   s.email = %q{dorrenchen@gmail.com}
   s.extra_rdoc_files = [
@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
      "VERSION",
      "active_resource_pagination.gemspec",
      "lib/active_resource_pagination.rb",
+     "lib/hash_ext.rb",
      "spec/active_resource_pagination_spec.rb",
+     "spec/hash_ext_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
@@ -36,6 +38,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Adds pagination to Active Resource}
   s.test_files = [
     "spec/active_resource_pagination_spec.rb",
+     "spec/hash_ext_spec.rb",
      "spec/spec_helper.rb"
   ]
 
